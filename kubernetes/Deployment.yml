@@ -1,0 +1,39 @@
+
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: python-test
+  labels:
+    name: python-test
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: helloworld-deployment
+  labels: 
+    app: helloworld
+  namespace: python-test
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: helloworld
+  template: 
+    metadata: # Dictionary
+      name: helloworld-pod
+      labels: # Dictionary 
+        app: helloworld       
+    spec:
+      containers: # List
+        - name: helloworld-container
+          image: rvacchi/hello-world:ssys
+          ports:
+            - containerPort: 3000
+          env:
+          - name: "PORT"
+            value: "3000"
+
+
+    
