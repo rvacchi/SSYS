@@ -1,0 +1,11 @@
+version: "3"
+services:
+  web:
+    build: 
+      context: ./webapp
+      dockerfile: Dockerfile
+    command: python hello-world.py
+    ports:
+      - "8080:8080"
+    # volumes:
+    #   - .:/code
